@@ -50,6 +50,7 @@ import com.velocitypowered.api.proxy.messages.ChannelMessageSink;
 import com.velocitypowered.api.proxy.messages.ChannelRegistrar;
 import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.geysermc.floodgate.api.FloodgateApi;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 
-//TODO: Support for floodgate
+//FixMe: Support for floodgate
 @Plugin(id = PomData.NAME, name = PomData.DISPLAY_NAME, description = PomData.DESCRIPTION, url = PomData.URL,
         version = PomData.VERSION, authors = {"games647", "https://github.com/games647/FastLogin/graphs/contributors"})
 public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
@@ -93,6 +94,10 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
         loadOrGenerateProxyId();
         if (!core.setupDatabase() || proxyId == null) {
             return;
+        }
+
+        if (isPluginInstalled("floodgate")) {
+            floodgateService = new FloodgateService(FloodgateApi.getInstance(), core);
         }
 
         server.getEventManager().register(this, new ConnectListener(this, core.getAntiBot()));
@@ -141,8 +146,8 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
     }
 
     @Override
-    public BedrockService<?> getBedrockService() {
-        return null;
+    public BedrockService<?> getFloodgateService() {
+        return floodgateService;
     }
 
     public FastLoginCore<Player, CommandSource, FastLoginVelocity> getCore() {
