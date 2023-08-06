@@ -124,7 +124,7 @@ public class PluginMessageListener {
             shouldPersist = floodgateService.isFloodgatePlayer(forPlayer.getUniqueId());
         }
 
-        if (shouldPersist){
+        if (shouldPersist) {
             //bukkit module successfully received and force logged in the user
             //update only on success to prevent corrupt data
             VelocityLoginSession loginSession = plugin.getSession().get(forPlayer.getRemoteAddress());
