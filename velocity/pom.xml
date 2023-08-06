@@ -157,8 +157,22 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>3.1.4</version>
         </dependency>
-
+        
         <!-- Bedrock player bridge -->
+        <dependency>
+            <groupId>org.geysermc.geyser</groupId>
+            <artifactId>core</artifactId>
+            <version>${geyser.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- Floodgate -->
         <!-- Version 2.2.2 -->
         <dependency>
             <groupId>org.geysermc.floodgate</groupId>
