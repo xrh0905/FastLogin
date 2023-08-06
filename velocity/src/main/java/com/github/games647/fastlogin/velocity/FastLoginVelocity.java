@@ -149,6 +149,10 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
         return server.getPluginManager().isLoaded(name);
     }
 
+    public FloodgateService getFloodgateService() {
+        return floodgateService;
+    }
+
     @Override
     public BedrockService<?> getBedrockService() {
         return floodgateService;
