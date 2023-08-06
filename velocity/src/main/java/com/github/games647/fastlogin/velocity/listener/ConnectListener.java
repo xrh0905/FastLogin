@@ -146,7 +146,7 @@ public class ConnectListener {
 
         FloodgateService floodgateService = plugin.getFloodgateService();
         if (floodgateService != null) {
-            FloodgatePlayer floodgatePlayer = floodgateService.getFloodgatePlayer(player.getUniqueId());
+            FloodgatePlayer floodgatePlayer = floodgateService.getBedrockPlayer(player.getUniqueId());
             if (floodgatePlayer != null) {
                 Runnable floodgateAuthTask = new FloodgateAuthTask(plugin.getCore(), player, floodgatePlayer, server);
                 plugin.getScheduler().runAsync(floodgateAuthTask);
