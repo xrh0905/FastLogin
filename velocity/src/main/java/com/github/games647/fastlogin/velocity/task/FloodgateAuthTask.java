@@ -58,13 +58,16 @@ public class FloodgateAuthTask
         boolean forcedOnlineMode = autoLoginFloodgate.equals("true")
                 || (autoLoginFloodgate.equals("linked") && isLinked);
 
+        core.getPlugin().getLog()
+                .info("Processing player {} with OnlineMode {}", player.getUsername(), forcedOnlineMode);
+
         // delay sending force command, because Paper will process the login event asynchronously
         // In this case it means that the force command (plugin message) is already received and processed while
         // player is still in the login phase and reported to be offline.
         Runnable loginTask = new ForceLoginTask(core.getPlugin().getCore(), player, server, session, forcedOnlineMode);
         core.getPlugin().getProxy().getScheduler()
                 .buildTask(core.getPlugin(), () -> core.getPlugin().getScheduler().runAsync(loginTask))
-                .delay(1L, TimeUnit.SECONDS) // Delay at least one second, otherwise the login command can be missed
+                .delay(2L, TimeUnit.SECONDS) // Delay at least one second, otherwise the login command can be missed
                 .schedule();
     }
 

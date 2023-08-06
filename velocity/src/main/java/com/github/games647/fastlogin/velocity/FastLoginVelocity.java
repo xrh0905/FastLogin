@@ -103,10 +103,12 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
 
         if (isPluginInstalled("floodgate")) {
             floodgateService = new FloodgateService(FloodgateApi.getInstance(), core);
+            logger.info("Floodgate Found!");
         }
 
         if (isPluginInstalled("Geyser-Velocity")) {
             geyserService = new GeyserService(GeyserImpl.getInstance(), core);
+            logger.info("Geyser-Velocity Found!");
         }
 
         server.getEventManager().register(this, new ConnectListener(this, core.getAntiBot()));
