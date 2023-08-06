@@ -28,7 +28,7 @@ package com.github.games647.fastlogin.velocity;
 import com.github.games647.fastlogin.core.AsyncScheduler;
 import com.github.games647.fastlogin.core.hooks.bedrock.BedrockService;
 import com.github.games647.fastlogin.core.hooks.bedrock.FloodgateService;
-//import com.github.games647.fastlogin.core.hooks.bedrock.GeyserService;
+import com.github.games647.fastlogin.core.hooks.bedrock.GeyserService;
 import com.github.games647.fastlogin.core.message.ChangePremiumMessage;
 import com.github.games647.fastlogin.core.message.ChannelMessage;
 import com.github.games647.fastlogin.core.message.SuccessMessage;
@@ -80,7 +80,7 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
     private FastLoginCore<Player, CommandSource, FastLoginVelocity> core;
     private AsyncScheduler scheduler;
     private FloodgateService floodgateService;
-    //private GeyserService geyserService;
+    private GeyserService geyserService;
     private UUID proxyId;
 
     @Inject
@@ -153,9 +153,16 @@ public class FastLoginVelocity implements PlatformPlugin<CommandSource> {
         return floodgateService;
     }
 
+    public GeyserService getGeyserService() {
+        return geyserService;
+    }
+
     @Override
     public BedrockService<?> getBedrockService() {
-        return floodgateService;
+        if (floodgateService != null) {
+            return floodgateService;
+        }
+        return geyserService;
     }
 
     public FastLoginCore<Player, CommandSource, FastLoginVelocity> getCore() {
