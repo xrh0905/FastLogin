@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.github.games647.fastlogin.velocity.task;
 
 import com.github.games647.fastlogin.core.shared.FastLoginCore;
